@@ -1,0 +1,569 @@
+////////Style
+// Custom PULO style v1.0
+// Bing Lu
+
+//Variables
+html, body {
+  height:100%;
+  min-height: 100%;
+}
+
+$base-spacer: $spacer*2;
+  
+.footer {
+  li.nav-item a.nav-link {
+  	padding-left: 0;
+    color: $gray-light;
+  }
+  .container-fluid {
+    border-top: 1px solid $hr-default;
+  }
+}
+
+// Card
+.card {
+  margin-bottom: $card-spacer-y;
+  .blockquote {
+    .card-text {
+      font-size: 0.9125rem;
+    }
+  }
+}
+.prolist-card {
+	.card-img-top {
+		object-fit: cover;
+		height: 180px;
+		width: 100%;
+		display: block;
+	}
+  .avatar {
+    margin-left: $spacer;
+  }
+}
+.avatar {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+}
+
+// Form
+.form-group {
+	.form-control-feedback { display: none }
+}
+
+.has-danger {
+	.form-control-label{ color: $gray-light }
+	.form-control-feedback { display: block; }
+}
+
+// Artical
+.article {
+	// Base
+	padding-top: $base-spacer;
+	padding-bottom: $spacer*2;
+	// Headline
+	h3 {
+		margin-bottom: $spacer;
+	}
+  h4 {
+    margin-bottom: $spacer*2;
+  }
+}
+
+// Faq
+.faq {
+  .article {
+    ul.list-unstyled {
+      li {
+        border-bottom: 1px solid $hr-default;
+        padding: $spacer;
+        padding-left: 0;
+      }
+      a {
+        color: $gray-dark
+      }
+      a:hover { 
+        color: $primary;
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+// Narrow Banner
+.bg-primary {
+  h1,h2,h3,h4,h5,h6 {
+    color: $white;
+    margin-bottom: $spacer;
+  }
+}
+
+//Stars
+.fa-phone {
+  vertical-align: middle;
+}
+.fa-star {
+  color: $primary;
+}
+.fa-star-o {
+  color: $gray-lighter;
+}
+
+// Matchpro List
+.card {
+  a:hover {
+    text-decoration: none;
+  }
+  .matchpro a {
+    color: $gray-dark; 
+    &:hover {
+      color: $primary;
+      text-decoration: none;
+    }
+  }
+  .projectList a {
+    color: $primary; 
+    &:hover {
+      color: $highlight;
+      text-decoration: none;
+    }
+  }
+}
+
+// Steppers
+.steppers {
+  list-style: none;
+
+  li {  
+    padding-left: 0.8em;
+    padding-bottom: 2rem;
+    line-height: 0.8rem;
+    &:before {
+      font-family: FontAwesome;
+      display: inline-block;
+      margin-left: -1.3em; /* same as padding-left set on li */
+      width: 1.3em; /* same as padding-left set on li */
+    }
+  }
+
+  li.check {
+    $li-color: $primary;
+    border-left: 1px solid $li-color;
+    color: $li-color;
+    &:before {
+      background: #fff;
+      color: $li-color;
+      content: "\f058"; /* FontAwesome Unicode */
+    }
+    &:last-child {
+      border-left: 0;
+    }
+  }
+
+  li.uncheck {
+    $li-color: $gray-lighter;
+    border-left: 1px solid $li-color;
+    color: $li-color;
+    &:before {
+      background: #fff;
+      color: $li-color;
+      content: "\f111"; /* FontAwesome Unicode */
+    }
+    &:last-child {
+      border-left: 0;
+    }
+  }
+}
+
+// Carousel 高度
+.carousel-item {
+  height: 75vh;
+  background: #000 no-repeat center center scroll;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background: #000;
+  
+  // For Text Vertical Middle
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+
+  h1, h2, h3 {
+    color: #fff;
+  }
+  .carousel-caption {
+    // For Text Vertical Middle
+    top: 50%;
+    transform: translateY(-50%);
+    bottom: initial;
+  }
+}
+// Desktop
+@include media-breakpoint-up(md) {
+  // 高度
+  .carousel-item {
+    min-height: 500px;  
+  }
+  // 字
+  .carousel-caption {
+    .title {
+      font-size: $display3-size;
+      font-weight: 200;
+    }
+    .subTitle {
+      font-size: $font-size-h1;
+      font-weight: 100;
+    }
+  }
+}
+// Mobile
+@include media-breakpoint-down(sm) {
+  // 字
+  .carousel-caption {
+    .title {
+      font-size: $font-size-h1;
+      font-weight: 200;
+    }
+    .subTitle {
+      font-size: $font-size-h3;
+      font-weight: 300;
+    }
+  }
+}
+
+.banner01:before {background-image: url('../../../static/images/home/img_banner_01.jpg')}
+.banner02:before {background-image: url('../../../static/images/home/img_banner_02.jpg')}
+.banner03:before {background-image: url('../../../static/images/home/img_banner_03.jpg')}
+.banner04:before {background-image: url('../../../static/images/home/img_banner_04.jpg')}
+
+.banner01:before, .banner02:before, .banner03:before, .banner04:before {
+  content: ' ';
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0.6;
+  background-position: 50% 50%;
+
+  // 圖片 url 要出現在以下屬性之前，而且不可拉出來，會失效。
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size:cover;
+  background-attachment: scroll;
+  background-color: #000;
+}
+
+// Our Service
+.our_service, .service_flow {
+  img {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+// PULO Guarantee
+.guarantee {
+  img {
+    width: 64px;
+    height: 64px;
+  }
+}
+
+// Media logo
+.media_logos {
+  img{
+    opacity:0.3;
+    object-fit: scale-down;
+    margin-right: $spacer*2;
+  }
+  .img_wide {
+    height: 48px;
+  }
+  .img_tall {
+    width: 120px;
+  }
+}
+
+// Hero Image
+.heroImg {
+  width:100%;
+  height:500px;
+  display:table;
+  background-color: #000;
+}
+.heroText {
+  display:table-cell;
+  vertical-align:middle;
+  color: $white;
+  h1, .lead {
+    color: $white;
+  }
+}
+
+// Become Pro
+.becomePro {
+  .heroImg {
+    background: url('../../../static/images/become_pro/img_become_pro.jpg');
+    // 圖片 url 要出現在以下屬性之前，而且不可拉出來，會失效。
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size:cover;
+    background-attachment: scroll;
+    background-color: #000;
+  }
+}
+// Download
+.download {
+  .heroImg {
+    background: url('../../../static/images/download/img_download.jpg');
+    // 圖片 url 要出現在以下屬性之前，而且不可拉出來，會失效。
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size:cover;
+    background-attachment: scroll;
+    background-color: #000;
+  }
+}
+
+// Guarantee
+.puloGuarantee {
+  .heroImg {
+    height:400px;
+    background: url('../../../static/images/img_pulo_guarantee.jpg');
+    // 圖片 url 要出現在以下屬性之前，而且不可拉出來，會失效。
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size:cover;
+    background-attachment: scroll;
+  }
+}
+
+// MediaReport
+.mediaReport {
+  li {
+    margin-bottom: $spacer;
+    a {color: $text-color}
+  }
+}
+// 404 page
+.imgError404 {
+  height: 250px;
+}
+@include media-breakpoint-down(sm) {
+  .imgError404 {
+    height: 150px;
+  }
+}
+
+
+// Litera 4.0.0
+// Bootswatch
+
+// Variables ===================================================================
+
+$web-font-path: "https://fonts.googleapis.com/css?family=Raleway:400,700" !default;
+@import url($web-font-path);
+
+$font-family-serif:      Georgia, Cambria, "Times New Roman", Times, serif !default;
+
+// Navbar ======================================================================
+
+.navbar {
+  font-size: $font-size-base;
+}
+
+.bg-dark {
+  background-color: $success !important;
+}
+
+.bg-light {
+  background-color: #fff !important;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+
+  &.navbar-fixed-top {
+    border-width: 0 0 1px 0;
+  }
+
+  &.navbar-fixed-bottom {
+    border-width: 1px 0 0 0;
+  }
+}
+
+// Buttons =====================================================================
+
+.btn {
+  border-radius: 0.5em;
+  font-family: $font-family-sans-serif;
+  font-size: 0.875em;
+
+  &-lg {
+    border-radius: 2.688em;
+  }
+
+  &-sm {
+    border-radius: 0.844em;
+    font-size: 0.688em;
+  }
+
+  &-secondary,
+  &-secondary:hover,
+  &-warning,
+  &-warning:hover {
+    color: $white;
+  }
+}
+
+// Typography ==================================================================
+
+p {
+  font-family: $font-family-sans-serif;
+}
+
+blockquote {
+  font-style: italic;
+}
+
+.footer {
+  .call {
+    text-decoration: none;
+    &:hover { color: $highlight }
+  }
+}
+
+.lead {
+  color: $gray-600;
+  font-family: $font-family-sans-serif;
+}
+
+// Tables ======================================================================
+
+table,
+.table {
+  font-size: 0.875em;
+
+  &-success,
+  &-info,
+  &-warning,
+  &-danger {
+    color: #fff;
+  }
+}
+
+.table {
+
+  &-success {
+    &, > th, > td {
+      background-color: $success;
+    }
+  }
+
+  &-info {
+    &, > th, > td {
+      background-color: $info;
+    }
+  }
+
+  &-danger {
+    &, > th, > td {
+      background-color: $danger;
+    }
+  }
+
+  &-warning {
+    &, > th, > td {
+      background-color: $warning;
+    }
+  }
+
+  &-hover {
+
+    .table-success:hover {
+      &, > th, > td {
+        background-color: darken($success, 5%);
+      }
+    }
+
+    .table-info:hover {
+      &, > th, > td {
+        background-color: darken($info, 5%);
+      }
+    }
+
+    .table-danger:hover {
+      &, > th, > td {
+        background-color: darken($danger, 5%);
+      }
+    }
+
+    .table-warning:hover {
+      &, > th, > td {
+        background-color: darken($warning, 5%);
+      }
+    }
+
+  }
+}
+
+// Forms =======================================================================
+
+// Navs ========================================================================
+
+.nav,
+.breadcrumb,
+.pagination {
+  font-size: 0.875em;
+}
+
+.dropdown-menu {
+  font-size: 0.875em;
+}
+
+// Indicators ==================================================================
+
+.alert {
+  border: none;
+  color: $white;
+  font-size: 0.875em;
+
+  &, p {
+    font-family: $font-family-sans-serif;
+  }
+
+  a, .alert-link {
+    color: #fff;
+    font-weight: normal;
+    text-decoration: underline;
+  }
+
+  @each $color, $value in $theme-colors {
+    &-#{$color} {
+      background-color: $value;
+    }
+  }
+}
+
+.badge {
+  vertical-align: bottom;
+
+  &-secondary,
+  &-warning {
+    color: $white;
+  }
+}
+
+.tooltip {
+  font-size: 11px;
+}
+
+// Progress bars ===============================================================
+
+// Containers ==================================================================
+
+.list-group {
+  font-size: 0.875em;
+}
