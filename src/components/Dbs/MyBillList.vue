@@ -34,6 +34,7 @@ div(class="bg-faded py-5")
 import ScaleLoader from 'vue-spinner/src/ScaleLoader.vue'
 import {ApiHandle} from '@/Api/ApiHandle.js'
 import {CommonFunction} from '@/common/CommonFunction.js'
+import {CommonToken} from '@/common/CommonToken.js'
 
 export default {
   components: {ScaleLoader},
@@ -42,7 +43,8 @@ export default {
     return {
       loading: false,
       datas: [],
-      errors: []
+      errors: [],
+      pId: ''
     }
   },
   methods: {
@@ -60,8 +62,10 @@ export default {
       let commonFunction = new CommonFunction()
       let url = commonFunction.GetApiUrl()
       this.loading = true
+      let commonToken = new CommonToken()
+      this.pId = commonToken.Getter()
       var params = new URLSearchParams()
-      params.append('uId', '10800001')
+      params.append('uId', this.pId)
       window.Vue.axios({
         method: 'post',
         url: url + 'MyBill/List',
