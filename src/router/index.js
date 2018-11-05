@@ -12,7 +12,6 @@ const Home = () => import('@/components/Home')
 Vue.use(Router)
 
 const router = new Router({
-  mode: 'history',
   routes: [
     { path: '/', component: Home }, // 根目錄
     // { path: '/about_pulo', name: 'about_pulo', component: AboutPULO }, // 關於PULO

@@ -8,8 +8,6 @@ nav(class="navbar navbar-expand-lg navbar-toggleable-sm navbar-light bg-light ")
         span(class="navbar-toggler-icon")    
       div(id="navbarResponsive" class="navbar-collapse collapse mw-100")
         ul(class="navbar-nav mr-auto")
-          li(class="nav-item")
-            router-link(to="/download" class="nav-link text-right" title="下載 PULO App") 下載 App
           li(v-if="hasToken", class="nav-item")
             router-link(to="/MyBillList" class="nav-link text-right" title="開單") 我的單
           li(v-if="hasAuthBill", class="nav-item")
@@ -22,8 +20,6 @@ nav(class="navbar navbar-expand-lg navbar-toggleable-sm navbar-light bg-light ")
             router-link(to="/TestList" class="nav-link text-right" title="處置") 處置
           li(v-if="hasAuthCheck", class="nav-item")
             router-link(to="/TestList" class="nav-link text-right" title="完工") 完工
-          li(class="nav-item")
-            router-link(to="/TestList" class="nav-link text-right" title="TestList") TestList
           li(v-if="!hasToken", class="nav-item")
             a(v-on:click="login", class="nav-link text-right", id="login", href="#") 登入
           li(v-if="hasToken" class="nav-item")
