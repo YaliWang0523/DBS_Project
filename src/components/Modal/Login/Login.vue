@@ -8,7 +8,6 @@ div(class="modal-content" ref="vuemodal")
       div(id="help-x1" class="form-control-feedback") {{selfErrorMsg}}
       scale-loader(v-show="loading" color="#45aaf4" size="10px")
   div(class="modal-footer")
-    button(type="button", class="btn btn-outline-secondary", data-dismiss="modal") 上一頁
     button(v-on:click="toMyMain", type="button", class="btn btn-primary", :disabled="(pId.length != 8)") 登入 
     
 </template>
@@ -33,6 +32,7 @@ export default {
   methods: {
     toMyMain: function () {
       this.loginData['pId'] = this.pId
+      this.pId = ''
       this.$emit('toLoginLayout', 'endFlowAndHiddenModal', this.loginData)
     }
   }

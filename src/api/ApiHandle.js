@@ -3,7 +3,6 @@ export class ApiHandle {
   constructor (onHanle, onError, onTokenError, apiData, showError, current) {
     // if (apiData && apiData.result && apiData.result === '10') {
     onHanle(apiData)
-    console.log(apiData)
     return 'success'
     // }
 //      else if (apiData && apiData.result && apiData.result === '19') {

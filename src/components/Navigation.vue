@@ -10,17 +10,17 @@ nav(class="navbar navbar-expand-lg navbar-toggleable-sm navbar-light bg-light ")
         ul(class="navbar-nav mr-auto")
           li(class="nav-item")
             router-link(to="/download" class="nav-link text-right" title="下載 PULO App") 下載 App
-          li(class="nav-item")
+          li(v-if="hasToken", class="nav-item")
             router-link(to="/MyBillList" class="nav-link text-right" title="開單") 我的單
-          li(class="nav-item")
+          li(v-if="hasAuthBill", class="nav-item")
             router-link(to="/TestList" class="nav-link text-right" title="開單") 開單
-          li(class="nav-item")
+          li(v-if="hasAuthSign", class="nav-item")
             router-link(to="/TestList" class="nav-link text-right" title="審核") 審核
-          li(class="nav-item")
+          li(v-if="hasAuthAssign", class="nav-item")
             router-link(to="/TestList" class="nav-link text-right" title="指派") 指派
-          li(class="nav-item")
+          li(v-if="hasAuthDisposal", class="nav-item")
             router-link(to="/TestList" class="nav-link text-right" title="處置") 處置
-          li(class="nav-item")
+          li(v-if="hasAuthCheck", class="nav-item")
             router-link(to="/TestList" class="nav-link text-right" title="完工") 完工
           li(class="nav-item")
             router-link(to="/TestList" class="nav-link text-right" title="TestList") TestList
@@ -43,7 +43,12 @@ export default {
   },
   computed: {
     ...mapGetters({
-      hasToken: (['getHasToken'])
+      hasToken: (['getHasToken']),
+      hasAuthBill: (['gettersBill']),
+      hasAuthSign: (['gettersSign']),
+      hasAuthAssign: (['gettersAssign']),
+      hasAuthDisposal: (['gettersDisposal']),
+      hasAuthCheck: (['gettersCheck'])
     })
   },
   methods: {
@@ -53,11 +58,13 @@ export default {
     logout: function () {
       let commonToken = new CommonToken()
       commonToken.Clear()
+
       this.toogleToken('')
+      this.toogleAuth([])
       // modal回到輸入電話號碼頁面
     },
     ...mapActions([
-      'toogleToken'
+      'toogleToken', 'toogleAuth'
     ])
   }
 }

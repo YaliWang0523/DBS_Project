@@ -12,13 +12,17 @@ const Home = () => import('@/components/Home')
 Vue.use(Router)
 
 const router = new Router({
+  mode: 'history',
   routes: [
     { path: '/', component: Home }, // 根目錄
     // { path: '/about_pulo', name: 'about_pulo', component: AboutPULO }, // 關於PULO
     { path: '/error_404', name: 'error_404', component: Error404 }, // 404Error
     { path: '/download', name: 'download', component: Download }, // 下載
     {path: '/testlist', name: 'testlist', component: TestList},
-    {path: '/mybilllist', name: 'mybilllist', component: MyBillList},
+    {path: '/mybilllist',
+      name: 'mybilllist',
+      component: MyBillList,
+      meta: {requiresAuth: true}},
     { path: '*', component: Error404 }
   ]}
 )

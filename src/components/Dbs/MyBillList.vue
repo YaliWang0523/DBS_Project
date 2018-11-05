@@ -35,6 +35,7 @@ import ScaleLoader from 'vue-spinner/src/ScaleLoader.vue'
 import {ApiHandle} from '@/Api/ApiHandle.js'
 import {CommonFunction} from '@/common/CommonFunction.js'
 import {CommonToken} from '@/common/CommonToken.js'
+import { mapGetters } from 'vuex'
 
 export default {
   components: {ScaleLoader},
@@ -88,6 +89,21 @@ export default {
   },
   created () {
     this.getData()
+  },
+  computed: {
+    ...mapGetters({
+      hasToken: (['getHasToken'])
+    })
+  },
+  watch: {
+    hasToken: function () {
+      let commonToken = new CommonToken()
+      this.token = commonToken.Getter()
+      if (commonToken.HasToken()) {
+      } else {
+        this.$router.replace({path: '/'})
+      }
+    }
   }
 }
 </script>

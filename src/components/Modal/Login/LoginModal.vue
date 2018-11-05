@@ -22,7 +22,8 @@ export default {
       loading: false,
       customLayout: 'LoginLayout',
       loginData: [],
-      errorMsg: ''
+      errorMsg: '',
+      pId: ''
     }
   },
   created () {
@@ -31,11 +32,26 @@ export default {
   methods: {
     onHandle: function (data) {
       this.datas = data
-      console.log(this.datas)
+      let auth = [false, false, false, false, false]
+      for (let key in this.datas) {
+        if (this.datas[key]['AUTHORITY'] === 'Bill') {
+          auth[0] = true
+        } else if (this.datas[key]['AUTHORITY'] === 'Sign') {
+          auth[1] = true
+        } else if (this.datas[key]['AUTHORITY'] === 'Assign') {
+          auth[2] = true
+        } else if (this.datas[key]['AUTHORITY'] === 'Disposal') {
+          auth[3] = true
+        } else if (this.datas[key]['AUTHORITY'] === 'Check') {
+          auth[4] = true
+        }
+      }
       let commonToken = new CommonToken()
-      commonToken.Setter(this.loginData['pId'], 'aaa')
+      this.pId = this.loginData['pId']
+      commonToken.Setter(this.pId, auth)
       this.loading = false
-      this.toogleToken('aaa')
+      this.toogleToken(this.pId)
+      this.toogleAuth(auth)
       this.toLayout('Login', [])
       $('#LoginModal').modal('hide')
     },
@@ -58,7 +74,6 @@ export default {
       })
       .then((response) => {
       /* eslint-disable no-new */
-        console.log(response)
         new ApiHandle(this.onHandle, this.onError, this.onTokenError, response.data, true, this)
         this.loading = false
       })
@@ -81,7 +96,7 @@ export default {
       this.errorMsg = 'shown'
     },
     ...mapActions([
-      'toogleToken'
+      'toogleToken', 'toogleAuth'
     ])
   },
   mounted () {
