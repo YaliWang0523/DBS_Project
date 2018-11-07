@@ -48,7 +48,6 @@ export default {
   },
   methods: {
     onNewBreakDownHandle: function (data) {
-      console.log(data)
       this.$router.replace({path: '/mybilllist'})
     },
     onNewBreakDownError: function () {
@@ -98,12 +97,13 @@ export default {
     getFixno: function () {
       let commonFunction = new CommonFunction()
       let url = commonFunction.GetApiUrl()
+      var params = new URLSearchParams()
+      params.append('', '')
       this.loading = true
       window.Vue.axios({
         method: 'post',
         url: url + 'Breakdown/Fixno',
-        data: {
-        }
+        data: params
       })
       .then((response) => {
       /* eslint-disable no-new */
@@ -132,12 +132,12 @@ export default {
       let commonFunction = new CommonFunction()
       let url = commonFunction.GetApiUrl()
       this.loading = true
-
+      var params = new URLSearchParams()
+      params.append('', '')
       window.Vue.axios({
         method: 'post',
         url: url + 'Equipment/List',
-        data: {
-        }
+        data: params
       })
       .then((response) => {
       /* eslint-disable no-new */

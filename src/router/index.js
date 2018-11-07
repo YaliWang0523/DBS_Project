@@ -8,7 +8,12 @@ const Download = () => import('@/components/Download/Download')
 const TestList = () => import('@/components/test/TestList')
 const MyBillList = () => import('@/components/Dbs/MyBillList')
 const CreateBill = () => import('@/components/Dbs/CreateBill')
+const SignList = () => import('@/components/Dbs/SignList')
 const Home = () => import('@/components/Home')
+const SignDetail = () => import('@/components/Dbs/SignDetail')
+const AssignList = () => import('@/components/Dbs/AssignList')
+const DisposalList = () => import('@/components/Dbs/DisposalList')
+const CheckList = () => import('@/components/Dbs/CheckList')
 
 Vue.use(Router)
 
@@ -26,6 +31,26 @@ const router = new Router({
     {path: '/createbill',
       name: 'createbill',
       component: CreateBill,
+      meta: {requiresAuth: true}},
+    {path: '/signlist',
+      name: 'signlist',
+      component: SignList,
+      meta: {requiresAuth: true}},
+    {path: '/assignlist',
+      name: 'assignlist',
+      component: AssignList,
+      meta: {requiresAuth: true}},
+    {path: '/disposallist',
+      name: 'disposallist',
+      component: DisposalList,
+      meta: {requiresAuth: true}},
+    {path: '/checklist',
+      name: 'checklist',
+      component: CheckList,
+      meta: {requiresAuth: true}},
+    {path: '/signdetail/:info',
+      name: 'signdetail',
+      component: SignDetail,
       meta: {requiresAuth: true}},
     { path: '*', component: Error404 }
   ]}

@@ -9,30 +9,23 @@ div(class="bg-faded py-5")
           div(class="card-body")
             table(class="table table-bordered m-0")
               tr
-                th(class="align-middle") 單號
-                th(class="align-middle") 部門
-                th(class="align-middle") 姓名
-                th(class="align-middle") 設備
+                th(class="align-middle", width = '100') 單號
+                td 
+              tr
+                th(class="align-middle", width = '100') 機器設備
+                td 
+              tr
                 th(class="align-middle") 描述
-                th(class="align-middle") 時間
-                th(class="align-middle") 狀態
-              tr(v-for="item of this.datas")
+                td 
+                  {{this.detail.DESCRIPTION}}
+              tr 歷程
                 td
-                  router-link(class="p-0", :to="{path: '/project_detail/' + item.FIXNO}" , @click.native="toSignDetail(item.FIXNO)" ) {{item.FIXNO}}
-                td 
-                  strong {{item.DEPNAME}}
-                td 
-                  strong {{item.NAME}}
-                td 
-                  strong {{item.EQUIPNAME}}
-                td 
-                  strong {{item.DESCRIPTION}}
-                td 
-                  strong {{item.TRANSTIME}}
-                td
-                  strong {{getStatusName(item.STATUS)}}
-        
-
+              tr 
+                td(colspan="2")
+                  button(v-on:click="reject", type="button", class="btn btn-primary") 退回
+                  &nbsp;&nbsp;
+                  button(v-on:click="sign_ok", type="button", class="btn btn-primary") 核可
+              
 </template>
 
 <script>
@@ -44,54 +37,44 @@ import { mapGetters } from 'vuex'
 
 export default {
   components: {ScaleLoader},
-  name: 'MyBillList',
+  name: 'SignDetail',
   data () {
     return {
       loading: false,
-      datas: [],
+      detail: [],
       errors: [],
-      pId: ''
+      pId: '',
+      fixno: ''
     }
   },
   methods: {
-    getStatusName: function (status) {
-      if (status) {
-        if (status === 'NEW') {
-          return '審核'
-        } else if (status === 'SIGNED') {
-          return '指派'
-        } else if (status === 'ASSIGN') {
-          return '處置'
-        } else if (status === 'REJECT') {
-          return '拒絕'
-        } else if (status === 'DISPOSAL') {
-          return '驗收'
-        } else if (status === 'CHECKED') {
-          return '完工'
-        }
-      }
+    sign_ok: function () {
+
+    },
+    reject: function () {
+
     },
     onHandle: function (data) {
-      this.datas = data
-      console.log(this.datas)
+      if (data) {
+        console.log(data)
+        this.detail = data['1']
+      }
     },
     onError: function () {
-      this.datas = []
+      this.detail = []
     },
     onTokenError: function () {
-      this.datas = []
+      this.detail = []
     },
     getData: function () {
       let commonFunction = new CommonFunction()
       let url = commonFunction.GetApiUrl()
       this.loading = true
-      let commonToken = new CommonToken()
-      this.pId = commonToken.Getter()
       var params = new URLSearchParams()
-      params.append('uId', this.pId)
+      params.append('fixno', this.fixno)
       window.Vue.axios({
         method: 'post',
-        url: url + 'MyBill/List',
+        url: url + '/Bill/GetDetail',
         data: params
       })
       .then((response) => {
@@ -110,6 +93,10 @@ export default {
     }
   },
   created () {
+    let commonToken = new CommonToken()
+    this.pId = commonToken.Getter()
+    this.fixno = this.$route.params.info
+    console.log(this.fixno)
     this.getData()
   },
   computed: {
