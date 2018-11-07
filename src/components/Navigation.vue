@@ -11,7 +11,7 @@ nav(class="navbar navbar-expand-lg navbar-toggleable-sm navbar-light bg-light ")
           li(v-if="hasToken", class="nav-item")
             router-link(to="/MyBillList" class="nav-link text-right" title="開單") 我的單
           li(v-if="hasAuthBill", class="nav-item")
-            router-link(to="/TestList" class="nav-link text-right" title="開單") 開單
+            router-link(to="/CreateBill" class="nav-link text-right" title="開單") 開單
           li(v-if="hasAuthSign", class="nav-item")
             router-link(to="/TestList" class="nav-link text-right" title="審核") 審核
           li(v-if="hasAuthAssign", class="nav-item")

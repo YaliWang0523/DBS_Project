@@ -7,6 +7,7 @@ const Error404 = () => import('@/components/Error/Error404')
 const Download = () => import('@/components/Download/Download')
 const TestList = () => import('@/components/test/TestList')
 const MyBillList = () => import('@/components/Dbs/MyBillList')
+const CreateBill = () => import('@/components/Dbs/CreateBill')
 const Home = () => import('@/components/Home')
 
 Vue.use(Router)
@@ -21,6 +22,10 @@ const router = new Router({
     {path: '/mybilllist',
       name: 'mybilllist',
       component: MyBillList,
+      meta: {requiresAuth: true}},
+    {path: '/createbill',
+      name: 'createbill',
+      component: CreateBill,
       meta: {requiresAuth: true}},
     { path: '*', component: Error404 }
   ]}
