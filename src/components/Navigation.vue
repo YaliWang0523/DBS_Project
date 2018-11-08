@@ -13,13 +13,13 @@ nav(class="navbar navbar-expand-lg navbar-toggleable-sm navbar-light bg-light ")
           li(v-if="hasAuthBill", class="nav-item")
             router-link(to="/CreateBill" class="nav-link text-right" title="開單") 開單
           li(v-if="hasAuthSign", class="nav-item")
-            router-link(to="/TestList" class="nav-link text-right" title="審核") 審核
+            router-link(to="/SignList" class="nav-link text-right" title="審核") 審核
           li(v-if="hasAuthAssign", class="nav-item")
-            router-link(to="/TestList" class="nav-link text-right" title="指派") 指派
+            router-link(to="/AssignList" class="nav-link text-right" title="指派") 指派
           li(v-if="hasAuthDisposal", class="nav-item")
-            router-link(to="/TestList" class="nav-link text-right" title="處置") 處置
+            router-link(to="/DisposalList" class="nav-link text-right" title="處置") 處置
           li(v-if="hasAuthCheck", class="nav-item")
-            router-link(to="/TestList" class="nav-link text-right" title="完工") 完工
+            router-link(to="/CheckList" class="nav-link text-right" title="完工") 完工
           li(v-if="!hasToken", class="nav-item")
             a(v-on:click="login", class="nav-link text-right", id="login", href="#") 登入
           li(v-if="hasToken" class="nav-item")

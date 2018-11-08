@@ -30,7 +30,9 @@ div(class="bg-faded py-5")
                 td 
                   strong {{item.TRANSTIME}}
                 td
-                  strong {{getStatusName(item.STATUS)}}
+                  strong(v-if="item.STATUS !== 'REJECT'") {{getStatusName(item.STATUS)}}
+                  button(v-if="item.STATUS === 'REJECT'",v-on:click="reSend(item.FIXNO)", type="button", class="btn btn-primary") 重送
+
         
 
 </template>
@@ -70,6 +72,9 @@ export default {
           return '完工'
         }
       }
+    },
+    reSend: function (fixno) {
+      this.$router.replace({name: 'resend', params: {info: fixno}})
     },
     onHandle: function (data) {
       this.datas = data

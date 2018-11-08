@@ -14,6 +14,7 @@ const SignDetail = () => import('@/components/Dbs/SignDetail')
 const AssignList = () => import('@/components/Dbs/AssignList')
 const DisposalList = () => import('@/components/Dbs/DisposalList')
 const CheckList = () => import('@/components/Dbs/CheckList')
+const ReSend = () => import('@/components/Dbs/ReSend')
 
 Vue.use(Router)
 
@@ -51,6 +52,10 @@ const router = new Router({
     {path: '/signdetail/:info',
       name: 'signdetail',
       component: SignDetail,
+      meta: {requiresAuth: true}},
+    {path: '/resend/:info',
+      name: 'resend',
+      component: ReSend,
       meta: {requiresAuth: true}},
     { path: '*', component: Error404 }
   ]}

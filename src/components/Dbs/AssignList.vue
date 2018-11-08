@@ -17,6 +17,7 @@ div(class="bg-faded py-5")
                 th(class="align-middle") 設備
                 th(class="align-middle") 描述
                 th(class="align-middle") 時間
+                th(class="align-middle") 廠商
                 th(class="align-middle")
               tr(v-for="item of this.datas")
                 td
@@ -33,6 +34,11 @@ div(class="bg-faded py-5")
                   strong {{item.DESCRIPTION}}
                 td 
                   strong {{item.TRANSTIME}}
+                td
+                  {{item.VENDOR}}
+                  select(v-model="selectVendor", class="form-control")
+                    option(value= "") 請選擇
+                    option(v-for="vd in item.VENDOR", :value= "vd.VENDNO") {{vd.VENDNAME}}
                 td
                   button(v-on:click="assign", type="button", class="btn btn-primary") 指派
 </template>
@@ -52,7 +58,9 @@ export default {
       loading: false,
       datas: [],
       errors: [],
-      pId: ''
+      pId: '',
+      selectVendor: '',
+      vendors: []
     }
   },
   methods: {
@@ -62,9 +70,50 @@ export default {
     assign: function () {
 
     },
+    onVendorHandle: function (data) {
+      this.vendors = data
+      console.log(this.vendors)
+      this.getData()
+    },
+    onVendorError: function () {
+      this.vendor = []
+      console.log('bb')
+    },
+    onVendorTokenError: function () {
+      this.vendor = []
+    },
+    getVendorData: function () {
+      let commonFunction = new CommonFunction()
+      let url = commonFunction.GetApiUrl()
+      this.loading = true
+      var params = new URLSearchParams()
+      params.append('', '')
+      window.Vue.axios({
+        method: 'post',
+        url: url + 'Vendor/List',
+        data: params
+      })
+      .then((response) => {
+      /* eslint-disable no-new */
+        new ApiHandle(this.onVendorHandle, this.onVendorError, this.onVendorTokenError, response.data, true, this)
+        this.loading = false
+      })
+      .catch(e => {
+        this.errors.push(e)
+        this.loading = false
+        // Error404
+        let commonFunction = new CommonFunction()
+        commonFunction.ToError404(this)
+      })
+    },
     onHandle: function (data) {
-      this.datas = data
-      console.log(this.datas)
+      var ds = data
+      console.log('dd')
+      for (let key in ds) {
+        console.log('cc')
+        console.log(ds[key])
+      }
+      this.datas = ds
     },
     onError: function () {
       this.datas = []
@@ -100,7 +149,7 @@ export default {
     }
   },
   created () {
-    this.getData()
+    this.getVendorData()
   },
   computed: {
     ...mapGetters({

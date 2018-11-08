@@ -34,7 +34,7 @@ div(class="bg-faded py-5")
                 td 
                   strong {{item.TRANSTIME}}
                 td
-                  button(v-on:click="reject", type="button", class="btn btn-primary") 確認完工
+                  button(v-on:click="check_ok(item.FIXNO)", type="button", class="btn btn-primary") 確認完工
 </template>
 
 <script>
@@ -59,11 +59,43 @@ export default {
     toSignDetail: function (fixno) {
       this.$router.replace({name: 'signdetail', params: {info: fixno}})
     },
-    sign_ok: function () {
-
+    check_ok: function (fixno) {
+      this.check(fixno)
     },
-    reject: function () {
-
+    onCheckHandle: function (data) {
+      this.getData()
+    },
+    onCheckError: function () {
+      this.datas = []
+    },
+    onCheckTokenError: function () {
+      this.datas = []
+    },
+    check: function (fixno) {
+      let commonFunction = new CommonFunction()
+      let url = commonFunction.GetApiUrl()
+      this.loading = true
+      let commonToken = new CommonToken()
+      this.pId = commonToken.Getter()
+      var params = new URLSearchParams()
+      params.append('fixno', fixno)
+      window.Vue.axios({
+        method: 'post',
+        url: url + 'Check/Ok',
+        data: params
+      })
+      .then((response) => {
+      /* eslint-disable no-new */
+        new ApiHandle(this.onCheckHandle, this.onCheckError, this.onCheckTokenError, response.data, true, this)
+        this.loading = false
+      })
+      .catch(e => {
+        this.errors.push(e)
+        this.loading = false
+        // Error404
+        let commonFunction = new CommonFunction()
+        commonFunction.ToError404(this)
+      })
     },
     onHandle: function (data) {
       this.datas = data

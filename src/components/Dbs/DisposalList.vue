@@ -34,7 +34,7 @@ div(class="bg-faded py-5")
                 td 
                   strong {{item.TRANSTIME}}
                 td
-                  button(v-on:click="reject", type="button", class="btn btn-primary") 處置
+                  button(v-on:click="disposal_ok(item.FIXNO)", type="button", class="btn btn-primary") 處置完成
 </template>
 
 <script>
@@ -59,11 +59,43 @@ export default {
     toSignDetail: function (fixno) {
       this.$router.replace({name: 'signdetail', params: {info: fixno}})
     },
-    sign_ok: function () {
-
+    disposal_ok: function (fixno) {
+      this.disposal(fixno)
     },
-    reject: function () {
-
+    onDisposalHandle: function (data) {
+      this.getData()
+    },
+    onDisposalError: function () {
+      this.datas = []
+    },
+    onDisposalTokenError: function () {
+      this.datas = []
+    },
+    disposal: function (fixno) {
+      let commonFunction = new CommonFunction()
+      let url = commonFunction.GetApiUrl()
+      this.loading = true
+      let commonToken = new CommonToken()
+      this.pId = commonToken.Getter()
+      var params = new URLSearchParams()
+      params.append('fixno', fixno)
+      window.Vue.axios({
+        method: 'post',
+        url: url + 'Disposal/Ok',
+        data: params
+      })
+      .then((response) => {
+      /* eslint-disable no-new */
+        new ApiHandle(this.onDisposalHandle, this.onDisposalError, this.onDisposalTokenError, response.data, true, this)
+        this.loading = false
+      })
+      .catch(e => {
+        this.errors.push(e)
+        this.loading = false
+        // Error404
+        let commonFunction = new CommonFunction()
+        commonFunction.ToError404(this)
+      })
     },
     onHandle: function (data) {
       this.datas = data
