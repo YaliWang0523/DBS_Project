@@ -3,16 +3,21 @@ export class CommonToken {
   constructor () {
     console.log('')
   }
-  Setter (token, auth) {
+  Setter (token, auth, depno) {
     Vue.localStorage.set('token', token)
+    Vue.localStorage.set('depno', depno)
     Vue.localStorage.set('auth', JSON.stringify(auth))
   }
   Getter () {
     return Vue.localStorage.get('token')
   }
+  GetterDepno () {
+    return Vue.localStorage.get('depno')
+  }
   Clear () {
     Vue.localStorage.set('token', '')
     Vue.localStorage.set('auth', '')
+    Vue.localStorage.set('depno', '')
   }
   HasToken () {
     let token = Vue.localStorage.get('token')

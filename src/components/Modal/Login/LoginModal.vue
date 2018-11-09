@@ -48,7 +48,8 @@ export default {
       }
       let commonToken = new CommonToken()
       this.pId = this.loginData['pId']
-      commonToken.Setter(this.pId, auth)
+      commonToken.Setter(this.pId, auth, this.datas['1']['DEPNO'])
+      console.log(commonToken.GetterDepno())
       this.loading = false
       this.toogleToken(this.pId)
       this.toogleAuth(auth)

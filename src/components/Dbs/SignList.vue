@@ -21,7 +21,7 @@ div(class="bg-faded py-5")
               tr(v-for="item of this.datas")
                 td
                   h4(class="projectList")
-                  router-link(class="p-0", :to="{path: '/project_detail/' + item.FIXNO}" , @click.native="toSignDetail(item.FIXNO)" ) {{item.FIXNO}}
+                  router-link(class="p-0", :to="{path: '/billdetail/' + item.FIXNO}") {{item.FIXNO}}
                   p 
                 td 
                   strong {{item.DEPNAME}}
@@ -73,6 +73,8 @@ export default {
       this.pId = commonToken.Getter()
       var params = new URLSearchParams()
       params.append('fixno', fixno)
+      params.append('pid', this.pId)
+      params.append('depno', commonToken.GetterDepno())
       window.Vue.axios({
         method: 'post',
         url: url + 'Sign/Reject',
@@ -106,6 +108,8 @@ export default {
       this.pId = commonToken.Getter()
       var params = new URLSearchParams()
       params.append('fixno', fixno)
+      params.append('pid', this.pId)
+      params.append('depno', commonToken.GetterDepno())
       window.Vue.axios({
         method: 'post',
         url: url + 'Sign/Ok',

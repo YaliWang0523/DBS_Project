@@ -57,10 +57,11 @@ export default {
     insertNewBreakDown: function () {
       let commonFunction = new CommonFunction()
       let url = commonFunction.GetApiUrl()
+      let commonToken = new CommonToken()
       this.loading = true
       var params = new URLSearchParams()
       params.append('fixno', this.fixno)
-      params.append('depno', 'MIS001')
+      params.append('depno', commonToken.GetterDepno())
       params.append('pid', this.pId)
       params.append('equipno', this.selectEqno)
       params.append('description', this.description)
@@ -86,6 +87,7 @@ export default {
     onGetFixnoHandle: function (data) {
       let dfixno = data
       this.fixno = dfixno['1']['NewFixNo']
+      console.log(this.fixno)
       this.insertNewBreakDown()
     },
     onGetFixnoError: function () {

@@ -22,7 +22,7 @@ div(class="bg-faded py-5")
               tr(v-for="item of this.datas")
                 td
                   h4(class="projectList")
-                  router-link(class="p-0", :to="{path: '/project_detail/' + item.FIXNO}" , @click.native="toSignDetail(item.FIXNO)" ) {{item.FIXNO}}
+                  router-link(class="p-0", :to="{path: '/billdetail/' + item.FIXNO}") {{item.FIXNO}}
                   p 
                 td 
                   strong {{item.DEPNAME}}
@@ -36,11 +36,11 @@ div(class="bg-faded py-5")
                   strong {{item.TRANSTIME}}
                 td
                   {{item.VENDOR}}
-                  select(v-model="selectVendor", class="form-control")
+                  select(v-model="item.selectVend", class="form-control")
                     option(value= "") 請選擇
-                    option(v-for="vd in item.VENDOR", :value= "vd.VENDNO") {{vd.VENDNAME}}
+                    option(v-for="vd in item.VEND", :value= "vd.VENDNO") {{vd.VENDNAME}}
                 td
-                  button(v-on:click="assign", type="button", class="btn btn-primary") 指派
+                  button(v-on:click="assign(item)", type="button", class="btn btn-primary") 指派
 </template>
 
 <script>
@@ -67,17 +67,55 @@ export default {
     toSignDetail: function (fixno) {
       this.$router.replace({name: 'signdetail', params: {info: fixno}})
     },
-    assign: function () {
-
+    assign: function (item) {
+      this.getAssignData(item)
+    },
+    onAssignHandle: function (data) {
+      this.getVendorData()
+    },
+    onAssignError: function () {
+    },
+    onAssignTokenError: function () {
+    },
+    getAssignData: function (item) {
+      let commonFunction = new CommonFunction()
+      let url = commonFunction.GetApiUrl()
+      let commonToken = new CommonToken()
+      this.pId = commonToken.Getter()
+      this.loading = true
+      var params = new URLSearchParams()
+      params.append('fixno', item['FIXNO'])
+      params.append('depno', commonToken.GetterDepno())
+      params.append('pid', this.pId)
+      params.append('vendor', item['selectVend'])
+      window.Vue.axios({
+        method: 'post',
+        url: url + 'Assign/Ok',
+        data: params
+      })
+      .then((response) => {
+      /* eslint-disable no-new */
+        new ApiHandle(this.onAssignHandle, this.onAssignError, this.onAssignTokenError, response.data, true, this)
+        this.loading = false
+      })
+      .catch(e => {
+        this.errors.push(e)
+        this.loading = false
+        // Error404
+        let commonFunction = new CommonFunction()
+        commonFunction.ToError404(this)
+      })
     },
     onVendorHandle: function (data) {
-      this.vendors = data
-      console.log(this.vendors)
+      let ven = data
+      for (var i = 0; i < ven['1'].length; i++) {
+        var temp = data['1'][i]
+        this.vendors.push(temp)
+      }
       this.getData()
     },
     onVendorError: function () {
       this.vendor = []
-      console.log('bb')
     },
     onVendorTokenError: function () {
       this.vendor = []
@@ -106,12 +144,11 @@ export default {
         commonFunction.ToError404(this)
       })
     },
-    onHandle: function (data) {
-      var ds = data
-      console.log('dd')
+    onHandle: function (listdata) {
+      var ds = listdata
       for (let key in ds) {
-        console.log('cc')
-        console.log(ds[key])
+        ds[key]['VEND'] = this.vendors
+        ds[key]['selectVend'] = ''
       }
       this.datas = ds
     },

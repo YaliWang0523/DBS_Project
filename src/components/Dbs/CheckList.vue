@@ -21,7 +21,7 @@ div(class="bg-faded py-5")
               tr(v-for="item of this.datas")
                 td
                   h4(class="projectList")
-                  router-link(class="p-0", :to="{path: '/project_detail/' + item.FIXNO}" , @click.native="toSignDetail(item.FIXNO)" ) {{item.FIXNO}}
+                  router-link(class="p-0", :to="{path: '/billdetail/' + item.FIXNO}") {{item.FIXNO}}
                   p 
                 td 
                   strong {{item.DEPNAME}}
@@ -34,7 +34,7 @@ div(class="bg-faded py-5")
                 td 
                   strong {{item.TRANSTIME}}
                 td
-                  button(v-on:click="check_ok(item.FIXNO)", type="button", class="btn btn-primary") 確認完工
+                  button(v-on:click="check_ok(item.FIXNO)", type="button", class="btn btn-primary") 驗收歸檔
 </template>
 
 <script>

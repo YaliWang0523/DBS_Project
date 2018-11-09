@@ -10,7 +10,7 @@ const MyBillList = () => import('@/components/Dbs/MyBillList')
 const CreateBill = () => import('@/components/Dbs/CreateBill')
 const SignList = () => import('@/components/Dbs/SignList')
 const Home = () => import('@/components/Home')
-const SignDetail = () => import('@/components/Dbs/SignDetail')
+const BillDetail = () => import('@/components/Dbs/BillDetail')
 const AssignList = () => import('@/components/Dbs/AssignList')
 const DisposalList = () => import('@/components/Dbs/DisposalList')
 const CheckList = () => import('@/components/Dbs/CheckList')
@@ -49,9 +49,9 @@ const router = new Router({
       name: 'checklist',
       component: CheckList,
       meta: {requiresAuth: true}},
-    {path: '/signdetail/:info',
-      name: 'signdetail',
-      component: SignDetail,
+    {path: '/billdetail/:info',
+      name: 'billdetail',
+      component: BillDetail,
       meta: {requiresAuth: true}},
     {path: '/resend/:info',
       name: 'resend',

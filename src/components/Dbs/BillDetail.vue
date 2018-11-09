@@ -10,21 +10,27 @@ div(class="bg-faded py-5")
             table(class="table table-bordered m-0")
               tr
                 th(class="align-middle", width = '100') 單號
-                td 
+                td {{this.detail.FIXNO}}
               tr
                 th(class="align-middle", width = '100') 機器設備
-                td 
+                td {{this.detail.EQUIPNAME}}
               tr
                 th(class="align-middle") 描述
-                td 
-                  {{this.detail.DESCRIPTION}}
-              tr 歷程
+                td {{this.detail.DESCRIPTION}}
+              tr
+                th(class="align-middle", width = '100') 歷程
                 td
-              tr 
-                td(colspan="2")
-                  button(v-on:click="reject", type="button", class="btn btn-primary") 退回
-                  &nbsp;&nbsp;
-                  button(v-on:click="sign_ok", type="button", class="btn btn-primary") 核可
+                  table
+                  tr
+                    th 時間
+                    th 操作者
+                    th 動作
+                    th 指派廠商
+                  tr(v-for="item of this.log" ,v-if = "item.ACTION_TIME !== null" )
+                    td {{item.ACTION_TIME}}
+                    td {{item.USERNAME}}
+                    td {{item.ACTION_NAME}}
+                    td {{item.ASSIGN_TO}}
               
 </template>
 
@@ -37,27 +43,24 @@ import { mapGetters } from 'vuex'
 
 export default {
   components: {ScaleLoader},
-  name: 'SignDetail',
+  name: 'BillDetail',
   data () {
     return {
       loading: false,
       detail: [],
       errors: [],
       pId: '',
-      fixno: ''
+      fixno: '',
+      log: []
     }
   },
   methods: {
-    sign_ok: function () {
-
-    },
-    reject: function () {
-
-    },
     onHandle: function (data) {
       if (data) {
-        console.log(data)
         this.detail = data['1']
+        this.log = data['2']
+        console.log(this.detail)
+        console.log(this.log)
       }
     },
     onError: function () {
