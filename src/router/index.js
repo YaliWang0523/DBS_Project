@@ -4,7 +4,6 @@ import {CommonToken} from '@/common/CommonToken.js'
 import $ from 'jquery'
 
 const Error404 = () => import('@/components/Error/Error404')
-const Download = () => import('@/components/Download/Download')
 const TestList = () => import('@/components/test/TestList')
 const MyBillList = () => import('@/components/Dbs/MyBillList')
 const CreateBill = () => import('@/components/Dbs/CreateBill')
@@ -23,7 +22,6 @@ const router = new Router({
     { path: '/', component: Home }, // 根目錄
     // { path: '/about_pulo', name: 'about_pulo', component: AboutPULO }, // 關於PULO
     { path: '/error_404', name: 'error_404', component: Error404 }, // 404Error
-    { path: '/download', name: 'download', component: Download }, // 下載
     {path: '/testlist', name: 'testlist', component: TestList},
     {path: '/mybilllist',
       name: 'mybilllist',

@@ -2,7 +2,7 @@
 nav(class="navbar navbar-expand-lg navbar-toggleable-sm navbar-light bg-light ")
   div(class="row justify-content-between w-100")
     a(class="navbar-brand pl-3", href="/", title="DBS 維修單系統")
-      //- img(src="static/images/img_navigation_logo.png", v-rjs="3" , width="80" height="28" alt="PULO Logo")
+      img(src="static/images/img_navigation_logo.png", v-rjs="3" , width="80" height="28" )
     div(class="text-right")
       button(class="navbar-toggler collapsed", type="button", data-toggle="collapse", data-target="#navbarResponsive", aria-controls="navbarResponsive", aria-expanded="false", aria-label="Toggle navigation")
         span(class="navbar-toggler-icon")    

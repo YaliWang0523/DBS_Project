@@ -234,9 +234,6 @@ $base-spacer: $spacer*2;
 }
 
 .banner01:before {background-image: url('../../../static/images/home/img_banner_01.jpg')}
-.banner02:before {background-image: url('../../../static/images/home/img_banner_02.jpg')}
-.banner03:before {background-image: url('../../../static/images/home/img_banner_03.jpg')}
-.banner04:before {background-image: url('../../../static/images/home/img_banner_04.jpg')}
 
 .banner01:before, .banner02:before, .banner03:before, .banner04:before {
   content: ' ';
@@ -305,51 +302,6 @@ $base-spacer: $spacer*2;
   }
 }
 
-// Become Pro
-.becomePro {
-  .heroImg {
-    background: url('../../../static/images/become_pro/img_become_pro.jpg');
-    // 圖片 url 要出現在以下屬性之前，而且不可拉出來，會失效。
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size:cover;
-    background-attachment: scroll;
-    background-color: #000;
-  }
-}
-// Download
-.download {
-  .heroImg {
-    background: url('../../../static/images/download/img_download.jpg');
-    // 圖片 url 要出現在以下屬性之前，而且不可拉出來，會失效。
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size:cover;
-    background-attachment: scroll;
-    background-color: #000;
-  }
-}
-
-// Guarantee
-.puloGuarantee {
-  .heroImg {
-    height:400px;
-    background: url('../../../static/images/img_pulo_guarantee.jpg');
-    // 圖片 url 要出現在以下屬性之前，而且不可拉出來，會失效。
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size:cover;
-    background-attachment: scroll;
-  }
-}
-
-// MediaReport
-.mediaReport {
-  li {
-    margin-bottom: $spacer;
-    a {color: $text-color}
-  }
-}
 // 404 page
 .imgError404 {
   height: 250px;
