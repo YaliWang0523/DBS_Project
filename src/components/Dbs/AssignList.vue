@@ -108,6 +108,7 @@ export default {
     },
     onVendorHandle: function (data) {
       let ven = data
+      this.vendors = []
       for (var i = 0; i < ven['1'].length; i++) {
         var temp = data['1'][i]
         this.vendors.push(temp)

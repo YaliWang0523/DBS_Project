@@ -56,11 +56,10 @@ export default {
   },
   methods: {
     onHandle: function (data) {
+      console.log(this.data)
       if (data) {
         this.detail = data['1']
         this.log = data['2']
-        console.log(this.detail)
-        console.log(this.log)
       }
     },
     onError: function () {
@@ -74,10 +73,11 @@ export default {
       let url = commonFunction.GetApiUrl()
       this.loading = true
       var params = new URLSearchParams()
+      console.log(this.fixno)
       params.append('fixno', this.fixno)
       window.Vue.axios({
         method: 'post',
-        url: url + '/Bill/GetDetail',
+        url: url + 'Bill/GetDetail',
         data: params
       })
       .then((response) => {
