@@ -56,7 +56,6 @@ export default {
   },
   methods: {
     onHandle: function (data) {
-      console.log(this.data)
       if (data) {
         this.detail = data['1']
         this.log = data['2']
@@ -99,7 +98,6 @@ export default {
     let commonToken = new CommonToken()
     this.pId = commonToken.Getter()
     this.fixno = this.$route.params.info
-    console.log(this.fixno)
     this.getData()
   },
   computed: {

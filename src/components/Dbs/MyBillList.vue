@@ -18,7 +18,7 @@ div(class="bg-faded py-5")
                 th(class="align-middle") 狀態
               tr(v-for="item of this.datas")
                 td
-                  router-link(class="p-0", :to="{path: '/billdetail/' + item.FIXNO}") {{item.FIXNO}}
+                  router-link(class="p-0", :to="{path: '/BillDetail/' + item.FIXNO}") {{item.FIXNO}}
                 td 
                   strong {{item.DEPNAME}}
                 td 
