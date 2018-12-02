@@ -15,6 +15,8 @@ export class CommonFunction {
 
   GetApiUrl () {
     if (process.env.NODE_ENV === 'production') {
+      // http://59.127.224.170:1234/
+      // http://127.0.0.1:5000/
       return 'http://127.0.0.1:5000/'
     } else {
       return '/data/'
